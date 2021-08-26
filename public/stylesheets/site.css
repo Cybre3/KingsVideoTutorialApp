@@ -38,3 +38,12 @@
     text-decoration: underline;
     box-shadow: 0 5px 10px #cccccc;
 }
+
+footer {
+    clear: both;
+    text-align: center;
+    margin: 20px;
+    padding: 5px;
+    background-color: #2b3336;
+    color: white;
+}
