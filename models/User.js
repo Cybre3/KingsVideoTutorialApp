@@ -17,8 +17,9 @@ const userSchema = new Schema({
 });
 
 userSchema.methods.findUser = function () {
-    return mongoose.model("user").find({ _id: this._id }, function () {
+    return mongoose.model("user").find({ _id: this._id }, function (err, user) {
         console.log("User Found!");
+        return user;
     });
 };
 
