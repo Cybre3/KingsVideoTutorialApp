@@ -11,7 +11,7 @@ const mongoose = require("mongoose");
 var homeRouter = require("./routes/home");
 var loginRouter = require("./routes/login");
 var registerRouter = require("./routes/register");
-var createCourseRouter = require("./routes/createCourse");
+var courseRouter = require("./routes/course");
 
 var app = express();
 
@@ -40,7 +40,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", homeRouter);
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
-app.use("/course", createCourseRouter);
+app.use("/course", courseRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

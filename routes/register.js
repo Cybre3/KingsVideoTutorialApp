@@ -5,6 +5,9 @@ var router = express.Router();
 const registerControl = require('../controllers/registerController');
 
 /* GET home page. */
-router.get('/', registerControl.get_registerForm);
+router.get('/', registerControl.get_register_form);
+
+// Post routes
+router.post('/', registerControl.post_createUser)
 
 module.exports = router;

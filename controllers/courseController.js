@@ -1,5 +1,8 @@
+// Models
 const Course = require("../models/Course");
 
+
+// Get routes
 const get_createCourse_form = function (req, res, next) {
     res.render("create-course");
 };
@@ -12,6 +15,8 @@ const get_editCourse_form = function (req, res, next) {
     res.render("edit-course");
 };
 
+
+// Post Routes
 const post_saveCourse_DB = function (req, res, next) {
     let { title, description, imageUrl, isPublic } = req.body;
     console.log("This is req.body:", req.body);
