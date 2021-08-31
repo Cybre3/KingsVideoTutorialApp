@@ -5,12 +5,13 @@ const expHbs = require("express-handlebars");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+const mongoose = require("mongoose");
 
 // Route Handlebars Templates
 var homeRouter = require("./routes/home");
 var loginRouter = require("./routes/login");
 var registerRouter = require("./routes/register");
-var createCourseRouter = require("./routes/createCourse");
+var courseRouter = require("./routes/course");
 
 var app = express();
 
@@ -39,7 +40,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", homeRouter);
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
-app.use("/course", createCourseRouter);
+app.use("/course", courseRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -55,6 +56,25 @@ app.use(function (err, req, res, next) {
     // render the error page
     res.status(err.status || 500);
     res.render("error", { layout: false });
+});
+
+// mongoDB connection
+mongoose
+    .connect(
+        "mongodb+srv://atlasAdmin:abcde12345@cluster0.g2ipk.mongodb.net/videoTutorialsApp?retryWrites=true&w=majority",
+        {
+            dbName: "videoTutorialsApp",
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        }
+    )
+    .then((res) => console.log("db connected"))
+    .catch((err) => console.log(err));
+
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", function () {
+    console.log("Testing Mongoose db.once method");
 });
 
 module.exports = app;
