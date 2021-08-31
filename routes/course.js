@@ -3,7 +3,8 @@ var express = require('express');
 var router = express.Router();
 // Controllers
 const courseControl = require('../controllers/courseController');
-
+// Middleware
+const middleware = require("../middleware/search");
 
 // Get routes
 router.get('/create', courseControl.get_createCourse_form);
@@ -12,5 +13,6 @@ router.get('/edit', courseControl.get_editCourse_form);
 
 // Post Routes
 router.post('/create', courseControl.post_saveCourse_DB);
+router.post('/edit', middleware.findMe, courseControl.post_editCourse_DB);
 
 module.exports = router;

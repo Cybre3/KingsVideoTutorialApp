@@ -4,16 +4,19 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     username: {
         type: String,
-        required: [ true, 'Username is Required, please enter username' ],
+        required: [true, "Username is Required, please enter username"],
+        unique: [true, "This username already exists!"],
     },
     password: {
         type: String,
-        required: [ true, 'Password is Required, please enter password' ],
+        required: [true, "Password is Required, please enter password"],
     },
-    enrolledCourses: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Course'
-    }]
+    enrolledCourses: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Course",
+        },
+    ],
 });
 
 userSchema.methods.findUser = function () {
