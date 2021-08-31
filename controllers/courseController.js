@@ -13,6 +13,9 @@ const get_courseDetails = function (req, res, next) {
 const get_editCourse_form = function (req, res, next) {
     res.render("edit-course");
 };
+const get_deleteCourse_form = function (req, res, next) {
+    res.render("delete-course");
+};
 
 // Post Routes
 const post_saveCourse_DB = function (req, res, next) {
@@ -65,11 +68,23 @@ const post_editCourse_DB = async function (req, res, next) {
 
     res.redirect("/");
 };
+const post_deleteCourse_DB = async function (req, res, next) {
+    const dbId = req.foundData;
+
+    await Course.findByIdAndDelete(dbId.id, function (err) {
+        if (err) return console.log(err);
+        console.log("Course deleted successful");
+    });
+
+    res.redirect("/");
+};
 
 module.exports = {
     get_createCourse_form,
     get_courseDetails,
     get_editCourse_form,
+    get_deleteCourse_form,
     post_saveCourse_DB,
     post_editCourse_DB,
+    post_deleteCourse_DB
 };
