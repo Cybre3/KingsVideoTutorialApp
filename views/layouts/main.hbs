@@ -12,47 +12,15 @@
 
 <body>
     <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand">Video Tutorials</a>
+        {{> nav}}
 
-            <ul class="navbar-nav ml-auto">
-
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Home </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Welcome, {{username}}</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="/logout">Logout</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="/login">Login</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="/register">Register</a>
-                </li>
-
-            </ul>
-        </nav>
-
-        <section class="notifications">
-            <p class="notification-message">Message...</p>
-        </section>
+        {{!-- {{> notify}} --}}
 
         <main>
             {{{body}}}
         </main>
 
-        <footer class="page-footer font-small">
-            <div class="footer-copyright text-center py-3">© 2019
-                <a href="#/">Express Fundamentals</a>
-            </div>
-        </footer>
+        {{> footer}}
 
     </div>
 </body>
