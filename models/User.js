@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const bcrypt = require("bcrypt");
+require("dotenv").config();
 
 const userSchema = new Schema({
     username: {
@@ -25,6 +27,12 @@ userSchema.methods.findUser = function () {
         return user;
     });
 };
+
+userSchema.pre("save", async function (next) {
+    const salt = await bcrypt.genSalt(+process.env.DB_SALTROUNDS);
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+});
 
 const User = mongoose.model("user", userSchema);
 

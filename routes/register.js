@@ -8,6 +8,6 @@ const registerControl = require('../controllers/registerController');
 router.get('/', registerControl.get_register_form);
 
 // Post routes
-router.post('/', registerControl.post_createUser)
+router.post('/', registerControl.post_createUser);
 
 module.exports = router;

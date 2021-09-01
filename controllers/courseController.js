@@ -5,11 +5,9 @@ const Course = require("../models/Course");
 const get_createCourse_form = function (req, res, next) {
     res.render("create-course");
 };
-
 const get_courseDetails = function (req, res, next) {
     res.render("course-details");
 };
-
 const get_editCourse_form = function (req, res, next) {
     res.render("edit-course");
 };
