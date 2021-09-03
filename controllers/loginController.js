@@ -39,10 +39,11 @@ const loginUser = async function (req, res, next) {
 
         res.cookie("token", token);
         
-        res.status(200).json({
-            message: "This is the token:",
-            token: token,
-        });
+        res.redirect('/');
+        // res.status(200).json({
+        //     message: "This is the token:",
+        //     token: token,
+        // });
     } catch (err) {
         console.log(err);
     }

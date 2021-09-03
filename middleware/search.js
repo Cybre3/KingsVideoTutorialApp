@@ -4,66 +4,55 @@ const User = require("../models/User");
 
 // methods
 const findMyCourse = async function (req, res, next) {
-
-    const cred = "612f07b510d4710d24288ad6";
+    const cred = req.params.id;
 
     try {
-        const data = await Course.findById(cred, function (err, data) {
-            if (err) return console.log(err);
-            console.log("Middleware: Found!", data);
-            req.foundData = data;
-            return data;
-        }).lean();
+        const data = await Course.findById(cred).lean();
+        console.log("Middleware: Search a course, Found!", data);
+        req.foundCourse = data;
+        next();
     } catch (err) {
         console.log(err);
     }
     // const string = 'working' + credential;
 
     // return string;
-    next();
 };
 
 const findMyUser = async function (req, res, next) {
+    const userId = req.user._id;
+    console.log(req.user);
 
-    const cred = "612f07b510d4710d24288ad6";
+    let data = await User.findById(userId);
+    // data.populate("enrolledCourses").exec();
+    // .then((data) => {
+    // })
+    // .catch((err) => console.log(err));
 
-    try {
-        const data = await User.findById(cred, function (err, data) {
-            if (err) return console.log(err);
-            console.log("Middleware: Found!", data);
-            req.foundData = data;
-            return data;
-        }).lean();
-    } catch (err) {
-        console.log(err);
-    }
+    req.foundUser = data;
+    console.log("Middleware: Search a user, Found!", data);
+    next();
     // const string = 'working' + credential;
 
     // return string;
-    next();
 };
 
 const findAllCourses = async function (req, res, next) {
-
     try {
-        const data = await Course.find(function (err, data) {
-            if (err) return console.log(err);
-            console.log("Middleware: Found!", data);
-            req.allCourses = data;
-            return data;
-        }).lean();
+        const data = await Course.find({}).lean();
+        req.allCourses = data;
+        console.log("Middleware: Search all courses, Found!", data);
+        next();
     } catch (err) {
         console.log(err);
     }
     // const string = 'working' + credential;
 
     // return string;
-    next();
 };
-
 
 module.exports = {
     findMyCourse,
     findMyUser,
-    findAllCourses
+    findAllCourses,
 };

@@ -11,6 +11,7 @@ require("dotenv").config();
 // Route Handlebars Templates
 var homeRouter = require("./routes/home");
 var loginRouter = require("./routes/login");
+var logoutRouter = require("./routes/logout");
 var registerRouter = require("./routes/register");
 var courseRouter = require("./routes/course");
 
@@ -40,6 +41,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // Routes Defined
 app.use("/", homeRouter);
 app.use("/login", loginRouter);
+app.use("/logout", logoutRouter);
 app.use("/register", registerRouter);
 app.use("/course", courseRouter);
 

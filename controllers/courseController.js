@@ -1,15 +1,24 @@
 // Models
 const Course = require("../models/Course");
+const User = require("../models/User");
 
 // Get routes
 const get_createCourse_form = function (req, res, next) {
     const validUser = req.user;
-    console.log(validUser)
+    console.log(validUser);
     res.render("create-course", { user: validUser });
 };
 const get_courseDetails = function (req, res, next) {
-    const validUser = req.user;
-    res.render("course-details", { user: validUser });
+    const validUser = req.foundUser;
+    const courseDetails = req.foundCourse;
+    const data = {
+        validUser,
+        courseDetails,
+    };
+
+    // validUser.populate('enrolledCourses');
+    // console.log(validUser)
+    res.render("course-details", { data: data });
 };
 const get_editCourse_form = function (req, res, next) {
     const validUser = req.user;
@@ -18,6 +27,26 @@ const get_editCourse_form = function (req, res, next) {
 const get_deleteCourse_form = function (req, res, next) {
     const validUser = req.user;
     res.render("delete-course", { user: validUser });
+};
+const get_enrollCourse = async function (req, res, next) {
+    const validUser = await req.user;
+    const course = await req.foundCourse;
+    const data = {
+        validUser,
+        course,
+    };
+    console.log('this is:', course._id, validUser)
+    await User.findByIdAndUpdate(
+        validUser._id,
+        {
+            $addToSet: { enrolledCourses: course._id },
+        },
+        function (err, data) {
+            console.log("Course added to user!");
+        }
+    ).lean();
+
+    res.redirect(`/course/details/${req.params.id}`);
 };
 
 // Post Routes
@@ -64,10 +93,14 @@ const post_editCourse_DB = async function (req, res, next) {
 
     const updatedCourse = { title, description, imageUrl, isPublic };
 
-    await Course.findByIdAndUpdate(dbId.id, updatedCourse, function (err, data) {
-        if (err) return console.log(err);
-        console.log("Course update successful", data);
-    });
+    await Course.findByIdAndUpdate(
+        dbId.id,
+        updatedCourse,
+        function (err, data) {
+            if (err) return console.log(err);
+            console.log("Course update successful", data);
+        }
+    );
 
     res.redirect("/");
 };
@@ -87,7 +120,8 @@ module.exports = {
     get_courseDetails,
     get_editCourse_form,
     get_deleteCourse_form,
+    get_enrollCourse,
     post_saveCourse_DB,
     post_editCourse_DB,
-    post_deleteCourse_DB
+    post_deleteCourse_DB,
 };

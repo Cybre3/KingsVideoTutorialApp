@@ -8,6 +8,6 @@ const middlewareSearch = require('../middleware/search');
 const middlewareAuth = require('../middleware/auth');
 
 /* GET home page. */
-router.get('/', middlewareAuth.auth, middlewareSearch.findAllCourses, middlewareSearch.findMyUser, homeControl.get_homeLayout);
+router.get('/', middlewareSearch.findAllCourses, middlewareAuth.auth, middlewareSearch.findMyUser, homeControl.get_homeLayout);
 
 module.exports = router;
