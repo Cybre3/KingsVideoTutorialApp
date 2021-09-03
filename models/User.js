@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const userSchema = new Schema({
@@ -26,6 +27,11 @@ userSchema.methods.findUser = function () {
         console.log("User Found!");
         return user;
     });
+};
+
+userSchema.methods.generateAuthToken = function () {
+    const token = jwt.sign({ _id: this._id }, process.env.SECRET_KEY);
+    return token;
 };
 
 userSchema.pre("save", async function (next) {

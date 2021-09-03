@@ -1,10 +1,11 @@
 // Models
 const Course = require("../models/Course");
+const User = require("../models/User");
 
 // methods
-const findMe = async function (req, res, next) {
+const findMyCourse = async function (req, res, next) {
 
-    const cred = "612a93a6ab0e4761646822e8";
+    const cred = "612f07b510d4710d24288ad6";
 
     try {
         const data = await Course.findById(cred, function (err, data) {
@@ -12,7 +13,27 @@ const findMe = async function (req, res, next) {
             console.log("Middleware: Found!", data);
             req.foundData = data;
             return data;
-        });
+        }).lean();
+    } catch (err) {
+        console.log(err);
+    }
+    // const string = 'working' + credential;
+
+    // return string;
+    next();
+};
+
+const findMyUser = async function (req, res, next) {
+
+    const cred = "612f07b510d4710d24288ad6";
+
+    try {
+        const data = await User.findById(cred, function (err, data) {
+            if (err) return console.log(err);
+            console.log("Middleware: Found!", data);
+            req.foundData = data;
+            return data;
+        }).lean();
     } catch (err) {
         console.log(err);
     }
@@ -24,5 +45,6 @@ const findMe = async function (req, res, next) {
 
 
 module.exports = {
-    findMe,
+    findMyCourse,
+    findMyUser
 };

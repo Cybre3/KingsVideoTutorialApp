@@ -1,18 +1,35 @@
-{{> vidTutorialsBlock}}
+{{#if user._id}}
 <div>
-    {{!-- <h1 class="text-center">Courses</h1> for users --}}
-    <h1 class="text-center">Top Courses</h1>
-    {{!-- {{> createAndSearch}} hbs if statement for user --}}
+    <h1 class="text-center">Courses</h1>
+
+    {{> createAndSearch}}
 
     <div class="container mt-3">
-       {{!--  <div class="row "> for user --}}
-            <div class="row d-flex justify-content-center"> 
+        <div class="row ">
 
-            {{!-- <div class="card-deck d-flex justify-content-center">  for user--}} 
-                <div class="card-deck">
+            <div class="card-deck d-flex justify-content-center">
                 {{> courseCard}}
             </div>
         </div>
     </div>
     <h3 class="text-center">No courses...</h3>
 </div>
+
+{{else}}
+
+{{> vidTutorialsBlock}}
+<div>
+
+    <h1 class="text-center">Top Courses</h1>
+
+    <div class="container mt-3">
+        <div class="row d-flex justify-content-center">
+
+            <div class="card-deck">
+                {{> courseCard}}
+            </div>
+        </div>
+    </div>
+    <h3 class="text-center">No courses...</h3>
+</div>
+{{/if}}

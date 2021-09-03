@@ -3,16 +3,21 @@ const Course = require("../models/Course");
 
 // Get routes
 const get_createCourse_form = function (req, res, next) {
-    res.render("create-course");
+    const validUser = req.user;
+    console.log(validUser)
+    res.render("create-course", { user: validUser });
 };
 const get_courseDetails = function (req, res, next) {
-    res.render("course-details");
+    const validUser = req.user;
+    res.render("course-details", { user: validUser });
 };
 const get_editCourse_form = function (req, res, next) {
-    res.render("edit-course");
+    const validUser = req.user;
+    res.render("edit-course", { user: validUser });
 };
 const get_deleteCourse_form = function (req, res, next) {
-    res.render("delete-course");
+    const validUser = req.user;
+    res.render("delete-course", { user: validUser });
 };
 
 // Post Routes
