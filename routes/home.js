@@ -4,10 +4,10 @@ var router = express.Router();
 // Controllers
 const homeControl = require('../controllers/homeController');
 // middleware
-const middleware = require('../middleware/search');
+const middlewareSearch = require('../middleware/search');
 const middlewareAuth = require('../middleware/auth');
 
 /* GET home page. */
-router.get('/', middlewareAuth.auth, middleware.findMyUser, homeControl.get_homeLayout);
+router.get('/', middlewareAuth.auth, middlewareSearch.findAllCourses, middlewareSearch.findMyUser, homeControl.get_homeLayout);
 
 module.exports = router;

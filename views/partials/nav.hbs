@@ -3,9 +3,13 @@
 
     <ul class="navbar-nav ml-auto">
 
+        <li class="nav-item">
+            <a class="nav-link" href="/">Home </a>
+        </li>
+
         {{#if _id}}
         <li class="nav-item">
-            <a class="nav-link" href="/">Welcome, {{username}}</a>
+            <a class="nav-link" href="/">Welcome, {{name}}</a>
         </li>
         
         <li class="nav-item">
@@ -13,9 +17,6 @@
         </li>
 
         {{else}}
-        <li class="nav-item">
-            <a class="nav-link" href="/">Home </a>
-        </li>
 
         <li class="nav-item">
             <a class="nav-link" href="/login">Login</a>

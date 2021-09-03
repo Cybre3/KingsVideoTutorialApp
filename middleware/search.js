@@ -43,8 +43,27 @@ const findMyUser = async function (req, res, next) {
     next();
 };
 
+const findAllCourses = async function (req, res, next) {
+
+    try {
+        const data = await Course.find(function (err, data) {
+            if (err) return console.log(err);
+            console.log("Middleware: Found!", data);
+            req.allCourses = data;
+            return data;
+        }).lean();
+    } catch (err) {
+        console.log(err);
+    }
+    // const string = 'working' + credential;
+
+    // return string;
+    next();
+};
+
 
 module.exports = {
     findMyCourse,
-    findMyUser
+    findMyUser,
+    findAllCourses
 };
