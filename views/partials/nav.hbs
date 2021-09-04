@@ -9,7 +9,7 @@
 
         {{#if data.decodedJWT}}
         <li class="nav-item">
-            <a class="nav-link" href="/">Welcome, {{data.validUser.username}}</a>
+            <a class="nav-link" href="/user/{{data.decodedJWT._id}}">Welcome, {{data.validUser.username}}</a>
         </li>
         
         <li class="nav-item">

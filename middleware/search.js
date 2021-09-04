@@ -23,7 +23,7 @@ const findMyUser = async function (req, res, next) {
     const userId = req.user._id;
     console.log(req.user);
 
-    let data = await User.findById(userId);
+    let data = await User.findById(userId).lean();
     // data.populate("enrolledCourses").exec();
     // .then((data) => {
     // })

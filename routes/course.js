@@ -16,8 +16,8 @@ router.get(
     middlewareSearch.findMyUser,
     courseControl.get_courseDetails
 );
-router.get("/edit", middlewareAuth.auth, courseControl.get_editCourse_form);
-router.get("/delete", middlewareAuth.auth, courseControl.get_deleteCourse_form);
+router.get("/edit/:id", middlewareAuth.auth, middlewareSearch.findMyCourse, courseControl.get_editCourse_form);
+router.get("/delete/:id", middlewareAuth.auth, middlewareSearch.findMyCourse, courseControl.get_deleteCourse_form);
 router.get(
     "/enroll/:id",
     middlewareAuth.auth,
@@ -29,12 +29,12 @@ router.get(
 // Post Routes
 router.post("/create", middlewareAuth.auth, courseControl.post_saveCourse_DB);
 router.post(
-    "/edit",
+    "/edit/:id",
     middlewareSearch.findMyCourse,
     courseControl.post_editCourse_DB
 );
 router.post(
-    "/delete",
+    "/delete/:id",
     middlewareSearch.findMyCourse,
     courseControl.post_deleteCourse_DB
 );

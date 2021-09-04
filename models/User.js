@@ -17,8 +17,8 @@ const userSchema = new Schema({
     },
     enrolledCourses: [
         {
-            type: Schema.Types.ObjectId,
-            // ref: 'Course',
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'course',
         },
     ],
 });
@@ -41,11 +41,11 @@ userSchema.pre("save", async function (next) {
     next();
 });
 
-userSchema.post("save", function (doc) {
-    console.log(doc.enrolledCourses);
-    doc.populate("enrolledCourses");
-    console.log(doc.enrolledCourses);
-});
+// userSchema.post("save", async function (doc) {
+//     console.log(doc.enrolledCourses);
+//     await doc.populate("enrolledCourses").execPopulate();
+//     console.log(doc.enrolledCourses);
+// });
 
 const User = mongoose.model("user", userSchema);
 
