@@ -7,14 +7,16 @@
             <a class="nav-link" href="/">Home </a>
         </li>
 
-       {{!--  <li class="nav-item"> --}}
-           {{!--  <a class="nav-link" href="/">Welcome, {{username}}</a> --}}
-      {{!--   </li> --}}
-        {{!-- <li class="nav-item">
+        {{#if data.decodedJWT}}
+        <li class="nav-item">
+            <a class="nav-link" href="/user/{{data.decodedJWT._id}}">Welcome, {{data.validUser.username}}</a>
+        </li>
+        
+        <li class="nav-item">
             <a class="nav-link" href="/logout">Logout</a>
-        </li>  --}}
-        {{!-- for registered users --}}
-       
+        </li>
+
+        {{else}}
 
         <li class="nav-item">
             <a class="nav-link" href="/login">Login</a>
@@ -23,6 +25,9 @@
         <li class="nav-item">
             <a class="nav-link" href="/register">Register</a>
         </li>
+        {{/if}}
+
+
 
     </ul>
 </nav>

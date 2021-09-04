@@ -28,10 +28,14 @@ const courseSchema = new Schema({
     },
     usersEnrolled: [
         {
-            type: Schema.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: "User",
         },
     ],
+    createdBy: {
+        type: String,
+        required: true
+    }
 });
 
 const Course = mongoose.model("course", courseSchema);

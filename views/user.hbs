@@ -1,0 +1,21 @@
+{{#with data}}
+<div>
+    {{> createAndSearch}}
+    {{#if allCourses}}
+    <h1 class="text-center">Courses</h1>
+
+
+    <div class="container mt-3">
+        <div class="row ">
+
+            <div class="card-deck d-flex justify-content-center">
+                {{>courseCard}}
+
+            </div>
+        </div>
+    </div>
+    {{else}}
+    <h3 class="text-center">No courses...</h3>
+    {{/if}}
+</div>
+{{/with}}
