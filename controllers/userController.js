@@ -10,12 +10,14 @@ const get_enrolledCourses = async function (req, res, next) {
 
     console.log("jwt", decodedJWT);
     await User.findById(decodedJWT._id)
+        .lean()
         .populate("enrolledCourses")
-        .exec((err, allCourses) => {
-            console.log(allCourses);
-            res.render("user", { data, allCourses });
+        .exec((err, fullUser) => {
+            console.log("populated user", fullUser);
+            data.validUser = fullUser;
+            console.log(data);
+            res.render("user", { data });
         });
-
 };
 
 module.exports = {

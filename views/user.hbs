@@ -1,8 +1,8 @@
-{{#with data}}
+{{#with data.validUser}}
 <div>
     {{> createAndSearch}}
-    {{#if allCourses}}
-    <h1 class="text-center">Courses</h1>
+    {{#if enrolledCourses}}
+    <h1 class="text-center">Enrolled Courses</h1>
 
 
     <div class="container mt-3">
