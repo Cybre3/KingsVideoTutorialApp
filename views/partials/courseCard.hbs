@@ -1,0 +1,47 @@
+{{#if allCourses}}
+    {{#if decodedJWT}}
+
+        {{#each allCourses}}
+            <div class="card mb-4">
+                <img class="card-img-top" src="{{imageUrl}}" alt="{{title}}" width="400">
+                <div class="card-body">
+                    <h4 class="card-title">{{title}}</h4>
+                </div>
+                
+                <div class="card-footer">
+                    <a href="/course/details/{{_id}}"><button type="button" class="btn btn-info">Details</button></a>
+                    <small class="float-right">{{createdAt}}</small>
+                </div>                
+            </div>
+        {{/each}}
+
+    {{else}}
+        
+        {{#each allCourses}}
+            <div class="card mb-4">
+                <img class="card-img-top" src="{{imageUrl}}" alt="{{title}}" width="400">
+                <div class="card-body">
+                    <h4 class="card-title">{{title}}</h4>
+                </div>                
+            </div>
+        {{/each}}
+
+    {{/if}}
+
+{{else}}
+
+    {{#each enrolledCourses}}
+    <div class="card mb-4">
+        <img class="card-img-top" src="{{imageUrl}}" alt="{{title}}" width="400">
+        <div class="card-body">
+            <h4 class="card-title">{{title}}</h4>
+        </div>
+        <div class="card-footer">
+            <a href="/course/details/{{_id}}"><button type="button" class="btn btn-info">Details</button></a>
+            <small class="float-right">{{createdAt}}</small>
+        </div>
+    </div>
+    {{/each}}
+
+{{/if}}
+
